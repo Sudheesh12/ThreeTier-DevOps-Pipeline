@@ -1,5 +1,5 @@
 resource "aws_vpc" "my_vpc" {
-    cidr_block = var.cidr_block_subnet
+    cidr_block = var.cidr_block_vpc
 
     tags = var.tags
 }
@@ -9,12 +9,7 @@ resource "aws_subnet" "my_subnet" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = var.cidr_block_subnet
     tags = var.tags
-}
-
-resource "aws_network_interface" "net-int" {
-    subnet_id = aws_subnet.my_subnet.id
-    private_ip =  var.network_interface_ip
-    tags = var.tags
+    availability_zone = "us-east-1a"
 }
 
 resource "aws_security_group" "sg" {
