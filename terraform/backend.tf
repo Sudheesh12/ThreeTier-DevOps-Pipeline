@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket = "terraform-sudheesh"
     key =   "terraform-sudheesh/ThreeTier_DevOps_Pipeline/terraform.tfstate"
-    region = var.region
+    region = us-east-1
     use_lockfile = true
   }
 }
