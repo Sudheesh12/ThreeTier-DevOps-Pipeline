@@ -42,7 +42,7 @@ resource "aws_security_group" "sg" {
 resource "aws_instance" "ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
-    vpc_security_group_ids = aws_security_group.sg.id
+    vpc_security_group_ids = [aws_security_group.sg.id]
   root_block_device {
     volume_size = var.volume_size
     volume_type = "gp3"
