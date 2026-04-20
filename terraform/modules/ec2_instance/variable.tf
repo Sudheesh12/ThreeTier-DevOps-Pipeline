@@ -1,0 +1,10 @@
+variable "ami_id" {}
+variable "" {}
+variable "cidr_block_vpc" {}
+variable "tags" {}
+variable "cidr_block_subnet" {}
+variable "network_interface_ip" {}
+variable "instance_name" {}
+variable "allow_sg_cidr" {}
+variable "instance_type" {}
+variable "volume_size" {}
