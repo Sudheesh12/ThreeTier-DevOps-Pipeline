@@ -38,7 +38,7 @@ variable "instance_name" {
 }
 
 variable "allow_sg_cidr" {
-  type        = string
+  type        = list(string)
   description = "allow sg Cidr ip"
 }
 
