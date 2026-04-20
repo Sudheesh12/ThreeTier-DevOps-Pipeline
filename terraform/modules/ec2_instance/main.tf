@@ -12,7 +12,7 @@ resource "aws_subnet" "my_subnet" {
 }
 
 resource "aws_network_interface" "net-int" {
-    subnet_id = aws_subnet.my_subnet.subnet_id
+    subnet_id = aws_subnet.my_subnet.id
     private_ip =  var.network_interface_ip
     tags = var.tags
 }
