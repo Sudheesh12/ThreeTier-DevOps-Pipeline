@@ -1,5 +1,4 @@
 variable "ami_id" {}
-variable "" {}
 variable "cidr_block_vpc" {}
 variable "tags" {}
 variable "cidr_block_subnet" {}
