@@ -13,7 +13,7 @@ network_interface_ip = "168.16.0.100"
 
 instance_name = "Three_tier-Devops-pipeline"
 volume_size   = "40"
-allow_sg_cidr = "[0.0.0.0/0]"
+allow_sg_cidr = ["0.0.0.0/0"]
 
 
 
