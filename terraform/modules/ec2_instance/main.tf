@@ -10,6 +10,7 @@ resource "aws_subnet" "my_subnet" {
     cidr_block = var.cidr_block_subnet
     tags = var.tags
     availability_zone = "us-east-1a"
+    map_public_ip_on_launch = true
 }
 
 resource "aws_security_group" "sg" {
@@ -38,6 +39,10 @@ resource "aws_instance" "ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
     vpc_security_group_ids = [aws_security_group.sg.id]
+
+    subnet_id = aws_subnet.my_subnet.id
+
+
   root_block_device {
     volume_size = var.volume_size
     volume_type = "gp3"
