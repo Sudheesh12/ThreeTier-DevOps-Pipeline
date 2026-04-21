@@ -1,18 +1,3 @@
-resource "aws_vpc" "my_vpc" {
-    cidr_block = var.cidr_block_vpc
-
-    tags = var.tags
-}
-
-
-resource "aws_subnet" "my_subnet" {
-    vpc_id = aws_vpc.my_vpc.id
-    cidr_block = var.cidr_block_subnet
-    tags = var.tags
-    availability_zone = "us-east-1a"
-    map_public_ip_on_launch = true
-}
-
 resource "aws_security_group" "sg" {
     vpc_id = aws_vpc.my_vpc.id
     name = "${var.instance_name}-sg"
@@ -50,8 +35,6 @@ resource "aws_instance" "ec2" {
     ami = var.ami_id
     instance_type = var.instance_type
     vpc_security_group_ids = [aws_security_group.sg.id]
-
-    subnet_id = aws_subnet.my_subnet.id
     key_name = aws_key_pair.my-key.key_name
 
   root_block_device {
