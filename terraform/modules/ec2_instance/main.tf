@@ -1,5 +1,4 @@
 resource "aws_security_group" "sg" {
-    vpc_id = aws_vpc.my_vpc.id
     name = "${var.instance_name}-sg"
     description = "allow-SSH"
 
