@@ -71,7 +71,7 @@ resource "aws_secretsmanager_secret" "sec-store" {
 resource "aws_secretsmanager_secret_version" "sec-push" {
   secret_id = aws_secretsmanager_secret.sec-store.id
   secret_string = jsonencode({
-    private_key = tls_private_key.my-key.private_key_pem
-    public_key  = tls_private_key.my-key.public_key_openssh
+    private_key = tls_private_key.key-gen.private_key_pem
+    public_key  = tls_private_key.key-gen.public_key_openssh
   })
 }
