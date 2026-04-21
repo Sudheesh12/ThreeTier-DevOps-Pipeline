@@ -20,7 +20,8 @@ resource "aws_security_group" "sg" {
 }
 
 resource "tls_private_key" "key-gen" {
-  algorithm = "ED25519"
+  algorithm = "RSA"
+  rsa_bits = 4096
 }
 
 resource "aws_key_pair" "my-key" {
@@ -45,7 +46,7 @@ resource "aws_instance" "ec2" {
 
 
 resource "aws_secretsmanager_secret" "sec-store" {
-  name = "ssh-keys/pipeline-ec2-1"
+  name = "ssh-keys/pipeline-ec2-2"
   description = "ssh private key for pipeline project"
 }
 
