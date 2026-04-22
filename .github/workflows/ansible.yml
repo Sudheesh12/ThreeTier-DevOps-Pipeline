@@ -8,7 +8,7 @@ on:
 
 jobs:
   ansible:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}     ## runs only if the the terraform apply on merge run successfully
     runs-on: ubuntu-latest
 
     defaults:
@@ -46,6 +46,20 @@ jobs:
         --query SecretString --output text | \
         jq -r '.private_key' > key.pem
         chmod 400 key.pem
+
+    - name: install ansible
+      run: |
+        sudo apt update
+        sudo apt install -y ansible
+
+
+    - name: create inventory
+      run: |
+        echo "[web]" >> inventory
+        echo "$PUBLIC_IP ansible_user=ubuntu ansible_ssh_private_key_file=key.pem" >> inventory
+
+    - name: build kind kubernetes infrastructure
+      run: ansible-playbook -i inventory  ansible/kubernetes_infra.yml
       
     - name: ssh into the machine
       uses: appleboy/ssh-action@v1
@@ -54,8 +68,7 @@ jobs:
         username: ubuntu
         key_path: key.pem
         script: |
-          echo "connected successfully Sudheesh"
-          uname -a
+          kubectl get nodes
 
 
 

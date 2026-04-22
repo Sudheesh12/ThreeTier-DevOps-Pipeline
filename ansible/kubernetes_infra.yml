@@ -1,0 +1,72 @@
+---
+- name: Set up the Kubernetes infrastructure for web application
+  hosts: web                                #runs for the web group in the inventory
+  become: yes                             #for sudo permission
+
+  tasks:
+
+     ## runs apt update
+    - name: update apt cache
+      apt:
+        update_cache: yes
+
+
+    - name: install docker
+      apt:
+        name:
+          - docker.io
+          - curl
+          - apt-transport-https
+          - ca-certificates
+        state: present
+        
+    - name: start docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: install kubeclt 
+      get_url:
+        url: https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl
+        dest: /usr/local/bin/kubectl
+        mode: '0775'
+
+    - name: install kind
+      get_url:
+        url: https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-amd64
+        dest: /usr/local/bin/kind
+        mode: '0775'
+      
+    - name: installation verification
+      shell: |
+        kubectl version --client
+        docker --version
+        kind --version
+      register: output
+
+    - debug:
+        var: output.stdout_lines
+
+    - name: copy kind config file
+      copy:
+        src: kind/webk8s.yaml
+        dest: /home/ubuntu/webk8s.yaml
+        mode: '0644'
+
+    - name: get existing kind clusters
+      shell: kind get clusters
+      register: kind_clusters
+
+    - name: create kind Cluster
+      command: kind create cluster --config /home/ubuntu/webk8s.yaml
+      when: "'kind' not in kind_clusters.stdout"
+
+    - name: check nodes
+      shell: |
+        kubectl cluster-info --context kind-kind
+        kubectl get nodes
+      register: nodes
+
+    - debug : 
+        var: nodes.stdout_lines
