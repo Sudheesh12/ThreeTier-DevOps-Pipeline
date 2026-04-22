@@ -67,15 +67,7 @@ jobs:
       run: ansible-playbook -i inventory  ansible/kubernetes_infra.yml
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
-      
-    - name: ssh into the machine
-      uses: appleboy/ssh-action@v1
-      with:
-        host: ${{ env.PUBLIC_IP }}
-        username: ubuntu
-        key_path: key.pem
-        script: |
-          kubectl get nodes
+
 
 
 
