@@ -36,7 +36,7 @@ jobs:
     - name: get the public ip address of the ec2 machine
       run: |
         PUBLIC_IP=$(terraform output -raw public_ip)
-        echo "Public IP: $PUBLIC_IP" >> $GITHUB_ENV
+        echo "Public IP=$PUBLIC_IP" >> $GITHUB_ENV
       working-directory: ./terraform
 
     - name: Get SSH key
