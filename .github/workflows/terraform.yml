@@ -44,6 +44,13 @@ jobs:
       run: terraform fmt -check
       working-directory: ./terraform
 
+    - name: Unlock state if stale lock exists     
+      run: terraform force-unlock -force $(
+        terraform force-unlock 2>&1 | grep "ID:" | awk '{print $2}'
+        ) || true
+      working-directory: ./terraform
+
+
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
