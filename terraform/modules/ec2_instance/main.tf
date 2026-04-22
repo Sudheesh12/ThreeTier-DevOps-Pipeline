@@ -46,7 +46,7 @@ resource "aws_instance" "ec2" {
 
 
 resource "aws_secretsmanager_secret" "sec-store" {
-  name = "ssh-keys/pipeline-ec2-2"
+  name = "ssh-keys/pipeline-ec2-3"
   description = "ssh private key for pipeline project"
 }
 
