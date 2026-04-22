@@ -47,7 +47,7 @@ jobs:
         key: ./key.pem
         port: 22
         script: |
-          echo "connected successfully"
+          echo "connected successfully Sudheesh"
 
 
 
