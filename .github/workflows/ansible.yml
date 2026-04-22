@@ -8,7 +8,7 @@ on:
 
 jobs:
   ansible:
-    name : 'ansible'
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     defaults:
@@ -36,7 +36,7 @@ jobs:
     - name: get the public ip address of the ec2 machine
       run: |
         PUBLIC_IP=$(terraform output -raw public_ip)
-        echo "Public IP=$PUBLIC_IP" >> $GITHUB_ENV
+        echo "PUBLIC_IP=$PUBLIC_IP" >> $GITHUB_ENV
       working-directory: ./terraform
 
     - name: Get SSH key
@@ -52,7 +52,7 @@ jobs:
       with:
         host: ${{ env.PUBLIC_IP }}
         username: ubuntu
-        key: key.pem
+        key_path: key.pem
         script: |
           echo "connected successfully Sudheesh"
           uname -a
