@@ -4,7 +4,7 @@ kind: Deployment
 
 metadata:
   name: backend
-  nameSpace: 3-tier-app
+  namespace: 3-tier-app
   labels:
     name: backend
     project: 3-tier-app
