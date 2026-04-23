@@ -4,6 +4,7 @@ kind: Deployment
 
 metadata:
   name: redis
+  nameSpace: 3-tier-app
   labels:
     name: redis
     project: 3-tier-app
