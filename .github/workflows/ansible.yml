@@ -63,10 +63,13 @@ jobs:
         mkdir -p ~/.ssh
         ssh-keyscan -H $PUBLIC_IP >> ~/.ssh/known_hosts
 
+
     - name: build kind kubernetes infrastructure
       run: ansible-playbook -i inventory  ansible/kubernetes_infra.yml
       env:
         ANSIBLE_HOST_KEY_CHECKING: false
+
+
 
 
 
