@@ -73,7 +73,7 @@
 
     - name: copy manifest files
       copy:
-        src: "{{ playbook_dir }}/../manifest
+        src: "{{ playbook_dir }}/../manifest"
         dest: /home/ubuntu/manifest/
         mode: '0644'
 
@@ -84,6 +84,3 @@
     
     - debug :
         var: kube.stdout_lines
-
-
-
