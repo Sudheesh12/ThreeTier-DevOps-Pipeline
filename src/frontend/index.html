@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3 Tier App</title>
+</head>
+<body>
+  <h1>3-Tier App Demo</h1>
+  <button onclick="callBackend()">Call Backend</button>
+  <p id="result"></p>
+
+  <script>
+    async function callBackend() {
+      const res = await fetch("/api");
+      const text = await res.text();
+      document.getElementById("result").innerText = text;
+    }
+  </script>
+</body>
+</html>
