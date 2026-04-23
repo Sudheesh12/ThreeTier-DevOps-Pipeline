@@ -24,7 +24,7 @@ spec:
       - name: nginx-frontend
         image: sudheesh12/frontend
         ports:
-          containerPort: 80
+        - containerPort: 80
 
 
 ---
@@ -34,8 +34,9 @@ kind: Service
 metadata:
   name: frontend
 spec:
+  type: nodePort
   selector:
     name: frontend
   ports:
   - port: 80
-    nodeport: 30000
+    nodePort: 30000
