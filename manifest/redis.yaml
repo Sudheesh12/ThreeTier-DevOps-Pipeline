@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: redis
+  labels:
+    name: redis
+    project: 3-tier-app
+    env: test
+
+spec:
+  selector:
+    matchlabels:
+      name: redis
+
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      containers:
+      - name: redis-backend
+        image: redis
+        ports:
+          containerPort: 6379
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector:
+    name: redis
+  ports:
+  - port: 6379
+    targetport: 6379
