@@ -73,9 +73,13 @@
 
     - name: copy manifest files
       copy:
-        src: "{{ playbook_dir }}/../manifest"
-        dest: /home/ubuntu/manifest/
+        src: ../manifest
+        dest: /home/ubuntu/
         mode: '0644'
+
+    - name: verify manifest files copied      
+      shell: find /home/ubuntu/manifest -type f
+      register: manifest_files
 
     - name: run Kubernetes manifest
       shell: |
