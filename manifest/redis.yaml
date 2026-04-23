@@ -11,7 +11,7 @@ metadata:
 
 spec:
   selector:
-    matchlabels:
+    matchLabels:
       name: redis
 
   template:
