@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: node-backend
-        image: sudheesh12/backend:v1
+        image: sudheesh12/backend:v2
         ports:
         - containerPort: 3000
 
