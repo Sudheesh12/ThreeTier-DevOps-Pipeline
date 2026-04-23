@@ -1,0 +1,3 @@
+resources:
+  - ingress-svc.yaml
+  - ingress-nginx-install.yaml
