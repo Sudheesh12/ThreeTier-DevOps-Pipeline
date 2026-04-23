@@ -24,6 +24,7 @@ spec:
       containers:
       - name: nginx-frontend
         image: sudheesh12/frontend:v1
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 

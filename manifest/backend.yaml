@@ -24,6 +24,7 @@ spec:
       containers:
       - name: node-backend
         image: sudheesh12/backend:v2
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
 
