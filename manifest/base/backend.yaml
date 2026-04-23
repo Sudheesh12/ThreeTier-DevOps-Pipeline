@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: backend
+  namespace: 3-tier-app
+  labels:
+    name: backend
+    project: 3-tier-app
+    env: test
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: backend
+
+  template:
+    metadata:
+      labels:
+        name: backend
+    spec:
+      containers:
+      - name: node-backend
+        image: sudheesh12/backend:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: 3-tier-app
+spec:
+  selector:
+    name: backend
+  ports:
+  - port: 3000
+    targetPort: 3000

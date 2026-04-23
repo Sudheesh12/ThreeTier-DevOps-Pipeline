@@ -1,0 +1,12 @@
+resources:
+  - ingress-nginx-install.yaml
+  
+patches:
+  - target:
+      kind: Service
+      name: ingress-nginx-controller
+      namespace: ingress-nginx
+    patch: |
+      - op: replace
+        path: /spec/ports/0/nodePort
+        value: 30001

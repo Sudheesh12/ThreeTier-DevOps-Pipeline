@@ -70,3 +70,20 @@
 
     - debug : 
         var: nodes.stdout_lines
+
+    - name: copy manifest files
+      copy:
+        src: "{{ playbook_dir }}/../manifest
+        dest: /home/ubuntu/manifest/
+        mode: '0644'
+
+    - name: run Kubernetes manifest
+      shell: |
+        kubectl apply -k /home/ubuntu/manifest/
+      register: kube
+    
+    - debug :
+        var: kube.stdout_lines
+
+
+
